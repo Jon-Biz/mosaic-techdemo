@@ -9,7 +9,7 @@ module.exports = {
 , output: {
     filename: 'index.js'
   , chunkFilename: "[id].js"
-  , path: __dirname + '/public/'
+  , path: __dirname + '/server/public/'
   , libraryTarget: 'umd'
   }
 

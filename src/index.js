@@ -32,7 +32,7 @@ class MosaicCLI extends Component{
     setTimeout(() => {
       if(response) log.push(response)
       this.setState({log})
-    }, 700)
+    }, 500)
   }
 
   onChange(event) {
