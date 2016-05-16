@@ -4,10 +4,10 @@
   "description": "Minimal boilerplate and configuration for the development of static react & es6 sites",
   "repository": "https://github.com/Jon-Biz/simple-static-react",
   "scripts": {
-    "webpack":"node ./node_modules/webpack/bin/webpack.js",
-    "webpack-dev-server":"node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "webpack": "node ./node_modules/webpack/bin/webpack.js",
+    "webpack-dev-server": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "build": "npm run webpack",
-    "dev": "npm run webpack-dev-server -s -- --progress --colors --port 4000 --content-base public"
+    "dev": "npm run webpack-dev-server -s -- --progress --colors --port 4000 --content-base server/public"
   },
   "babel": {
     "presets": [
@@ -24,6 +24,7 @@
     "babel-preset-es2015": "^6.6.0",
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
+    "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
