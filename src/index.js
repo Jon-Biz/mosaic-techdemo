@@ -11,13 +11,12 @@ const log = [ {type:'computer',text:'How may I help you?'} ]
 
 class MosaicCLI extends Component{
 
-
   constructor(props) {
     super(props);
     this.state = { log }
   }
 
-  onSubmit(event) {
+  onSubmit() {
 
     log.push({
       type:'user'
@@ -25,7 +24,7 @@ class MosaicCLI extends Component{
     , text:this.state.value
     })
 
-    this.setState({log})
+    this.setState({log, value:''})
 
     const response = responseGenerator(this.state.value)
 
@@ -35,14 +34,15 @@ class MosaicCLI extends Component{
     }, 500)
   }
 
-  onChange(event) {
-    this.setState({value: event.target.value})
-  }
+  onChange(event) { this.setState({value: event.target.value}) }
+
+  handleKeyPress(event) { if (event.key === 'Enter') this.onSubmit() }
 
   render() {
     const log = this.state.log
     const onChange = this.onChange.bind(this)
     const onSubmit = this.onSubmit.bind(this)
+    const handleKeyPress = this.handleKeyPress.bind(this)
 
     const logStyle = {
       maxWidth: '30em'
@@ -52,11 +52,13 @@ class MosaicCLI extends Component{
       position: 'absolute'
     , bottom: '1em'
     , width: '90%'
+    , maxWidth: '30em'
     , display: 'flex'
     }
 
     const inputStyle = {
-      width: '100%'
+      width: '80%'
+    , marginRight: '1em'
     }
 
     return (
@@ -66,7 +68,12 @@ class MosaicCLI extends Component{
             { log.map(message => <Message key={message.time} {...message} />) }
           </div>
           <div style={inputBoxStyle}>
-            <input style={inputStyle} type="text" onChange={onChange} />
+            <input
+              style={inputStyle}
+              type="text"
+              onKeyPress = {handleKeyPress}
+              onChange={onChange}
+              value={this.state.value} />
             <button onClick={onSubmit} >
               Enter
             </button>
