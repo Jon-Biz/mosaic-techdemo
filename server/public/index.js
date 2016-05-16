@@ -112,7 +112,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  _createClass(MosaicCLI, [{
 	    key: 'onSubmit',
-	    value: function onSubmit(event) {
+	    value: function onSubmit() {
 	      var _this2 = this;
 	
 	      log.push({
@@ -121,7 +121,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        text: this.state.value
 	      });
 	
-	      this.setState({ log: log });
+	      this.setState({ log: log, value: '' });
 	
 	      var response = (0, _responseGenerator2.default)(this.state.value);
 	
@@ -136,11 +136,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.setState({ value: event.target.value });
 	    }
 	  }, {
+	    key: 'handleKeyPress',
+	    value: function handleKeyPress(event) {
+	      if (event.key === 'Enter') this.onSubmit();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var log = this.state.log;
 	      var onChange = this.onChange.bind(this);
 	      var onSubmit = this.onSubmit.bind(this);
+	      var handleKeyPress = this.handleKeyPress.bind(this);
 	
 	      var logStyle = {
 	        maxWidth: '30em'
@@ -150,11 +156,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        position: 'absolute',
 	        bottom: '1em',
 	        width: '90%',
+	        maxWidth: '30em',
 	        display: 'flex'
 	      };
 	
 	      var inputStyle = {
-	        width: '100%'
+	        width: '80%',
+	        marginRight: '1em'
 	      };
 	
 	      return _react2.default.createElement(
@@ -175,7 +183,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _react2.default.createElement(
 	          'div',
 	          { style: inputBoxStyle },
-	          _react2.default.createElement('input', { style: inputStyle, type: 'text', onChange: onChange }),
+	          _react2.default.createElement('input', {
+	            style: inputStyle,
+	            type: 'text',
+	            onKeyPress: handleKeyPress,
+	            onChange: onChange,
+	            value: this.state.value }),
 	          _react2.default.createElement(
 	            'button',
 	            { onClick: onSubmit },
@@ -28290,23 +28303,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var NEST_URL = 'https://home.nest.com/login/oauth2?client_id=9f7aea83-66fb-46e1-ade2-e3750d2e9d49&state=1234';
-	var windowSpecs = "width=400, height=400, top=100, left=100";
-	
-	var Login = function Login() {
-	  window.open(NEST_URL, '', windowSpecs);
-	};
-	
-	var Bogin = function Bogin() {
-	  var style = { width: '100%', height: '40em' };
-	  return _react2.default.createElement('iframe', { style: style, src: NEST_URL });
-	};
+	var WINDOW_SPECS = "width=400, height=400, top=100, left=100";
 	
 	exports.default = function (message) {
-	
 	  var response = void 0;
+	
 	  switch (message) {
 	    case 'link nest':
-	      response = _react2.default.createElement(Login, null);
+	      window.open(NEST_URL, '', WINDOW_SPECS);
+	      response = _react2.default.createElement(
+	        'span',
+	        null,
+	        'Logging you in...'
+	      );
 	      break;
 	    default:
 	      response = _react2.default.createElement(
@@ -28316,6 +28325,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        '? That\'s nice.'
 	      );
 	  }
+	
 	  return {
 	    type: 'computer',
 	    time: new Date().toISOString(),
