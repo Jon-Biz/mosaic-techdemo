@@ -1,40 +1,25 @@
-#Simple Static React
+#Mosaic Tech Demo
 
-This repo is minimal boilerplate for static react & es6 site.
+This repo is a server that displays a conversational UI, tied into Nest's login page.
 
-It is intended for to get you up and developing with a minimum of fuss and configuration for your Firebase, Github, or plain old web server, or as the front-end for the Wordpress API.
-
-This version doesn't have have a router - it just drops you straight into the page. If a simple, hash-based router would get you further along, use
-https://github.com/Jon-Biz/simple-static-react-router .
+It was built using my Simple Static React boilerplate ( https://github.com/Jon-Biz/simple-static-react ), with an express server added on.
 
 ##Set up
 
-Clone the repo and install the node dependencies.
+- You'll need to have node installed.
+- Clone the repo and install the node dependencies.
 
 ```
-git clone https://github.com/Jon-Biz/simple-static-react
-cd simple-static-react
+git clone https://github.com/Jon-Biz/mosaic-techdemo
+cd mosaic-techdemo
 npm i
 ```
 
 ##Usage
 
-###Development
-
-Run the npm script `dev` to develop.
+- Run the `server` script to start the server on port 80.
 
 ```
-npm run dev
+node server
 ```
 
-A webpack server will now be running on `4000`, serving the contents of the `public` directory. The `entry` files are in `src` - `index.js` and `style.css`.
-
-NOTE: this is using webpack-dev-server, not actually overwriting the files in `public`. For that, you will need to run the build script.
-
-###Production
-
-Run the npm script 'build' to update `style.css` and `index.js` in the `public` directory. Upload this directory to your web server.
-
-```
-npm run build
-```
